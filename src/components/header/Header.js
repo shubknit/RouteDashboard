@@ -1,5 +1,4 @@
 import React from 'react';
-import './header.css';
 
 // This component is create a header
 export const Header = () => (

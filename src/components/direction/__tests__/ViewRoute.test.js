@@ -7,7 +7,7 @@ beforeAll(() => {
   document.body.appendChild(script);
 })
 
-test('should render the Map Component correctly', () => {
+it('should render the Map Component correctly', () => {
     const wrapper = renderer.create(<ViewRoute/>).toJSON();
     expect(wrapper).toMatchSnapshot();
 })

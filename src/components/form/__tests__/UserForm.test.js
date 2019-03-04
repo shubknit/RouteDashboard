@@ -23,17 +23,17 @@ const _endPoint = {
 }
 
 
-test('should render the form correctly with distance and time', () => {
+it('should render the form correctly with distance and time', () => {
     const wrapper = renderer.create(<UserForm data = {data}/>).toJSON();
     expect(wrapper).toMatchSnapshot();
 })
 
-test('should render the error correctly', () => {
+it('should render the error correctly', () => {
     const wrapper = renderer.create(<UserForm data = {errorData}/>).toJSON();
     expect(wrapper).toMatchSnapshot();
 })
 
-test('should submit form correctly', () => {
+it('should submit form correctly', () => {
     const onSubmitSpy = jest.fn();
 	const wrapper = shallow(<UserForm data = {data} addLocation = {onSubmitSpy}/>)
     wrapper.find('form').simulate('submit', {
