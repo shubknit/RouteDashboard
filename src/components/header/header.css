@@ -1,0 +1,15 @@
+.header {
+    background: #000;
+  }
+ .header__content {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+   
+  }
+  
+  .header__title {
+    color: white;
+    text-decoration: none;
+  }
+  

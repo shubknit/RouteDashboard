@@ -1,0 +1,32 @@
+@import './base/settings';
+@import './base/base';
+@import './components/button';
+@import './components/header';
+@import './components/content-container';
+@import './components/inputs';
+@import './components/form';
+
+.content{
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    #map{
+        width: 50vw;
+        height: 100vh;
+    }
+    .error {
+        color: red;
+    }
+    .button-container{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+@media screen and (max-width: 767px) {
+    .content {
+        display: block;
+        #map{
+            width: auto;
+        }
+    }
+}

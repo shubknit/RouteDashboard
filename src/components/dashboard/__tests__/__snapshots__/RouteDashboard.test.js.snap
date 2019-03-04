@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render the dashboard page correctly 1`] = `
+<div
+  className="main-container"
+>
+  <header
+    className="header"
+  >
+    <div
+      className="content-container"
+    >
+      <div
+        className="header__content"
+      >
+        <h1>
+          Router Finder App
+        </h1>
+      </div>
+    </div>
+  </header>
+  <div
+    className="content"
+  >
+    <div
+      className="form-container"
+    >
+      <form
+        className="form"
+        onSubmit={[Function]}
+      >
+        <label
+          htmlFor="start-point"
+        >
+           Starting Location 
+        </label>
+        <input
+          className="text-input"
+          id="start-point"
+          placeholder="start point"
+          required={true}
+          type="text"
+        />
+        <label
+          htmlFor="end-point"
+        >
+           Drop-off point
+        </label>
+        <input
+          className="text-input"
+          id="end-point"
+          placeholder="end point"
+          required={true}
+          type="text"
+        />
+        <div
+          className="button-container"
+        >
+          <button
+            className="button"
+            type="submit"
+          >
+             
+            Submit
+             
+          </button>
+          <button
+            className="button"
+            type="reset"
+          >
+             Reset 
+          </button>
+        </div>
+      </form>
+    </div>
+    <div
+      className="map-container"
+    >
+      <div
+        id="map"
+      />
+    </div>
+  </div>
+</div>
+`;
