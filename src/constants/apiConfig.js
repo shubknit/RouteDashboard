@@ -1,16 +1,16 @@
 // API details 
-export const MockAPIDetails = {
+export const routeApiDetails = {
     baseURL: 'http://localhost:8080',
     route: '/route'
 } 
 
 // API status in progress
-export const MockAPIStatus = {
-    status: 'in progress'
+export const routeApiStatus = {
+    inProgress: 'in progress'
 }
 
 // When internal server error got in API
 export const responseError = {
-    error: 'A generic server error occurred',
+    error: 'Internal Server Error',
     status: 500
 }

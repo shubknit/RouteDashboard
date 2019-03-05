@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Header } from '../header/Header';
 import { UserForm } from '../form/UserForm';
 import  { ViewRoute }  from '../direction/ViewRoute';
-import { getRouteDetails } from '../../services/mockAPI';
+import { getRouteDetails } from '../../services/RouteDetailsAPI';
 import { responseError } from '../../constants/apiConfig';
 
-// This Component acts a dashboard which includes form and map view.
+// This Component acts a dashboard  which includes user form and map view.
 export class RouteDashboard extends Component {
 	constructor() {
 		super();
@@ -13,26 +13,21 @@ export class RouteDashboard extends Component {
 			mapData : {},
 			isFetching: false
 		}
-		this.addLocation = this.addLocation.bind(this);
+  }
+	// setstate when call turned into server error from API
+	handleError = () => {
+		this.setState({
+			status: responseError.status,
+			error: responseError.error,
+			isFetching: false
+		})
 	}
 
-	async addLocation(data){
-		const {start, end} = data;
-		this.setState({
-			isFetching: true
-		})
-		const response = await getRouteDetails(start, end).catch(e => {
-			this.setState({
-				mapData: {},
-				status: responseError.status,
-				error: responseError.error,
-				isFetching: false
-			})
-		});
+	// set state when call get success from API
+	handleResponse = (response) => {
 		if(response && response.error){
 			this.setState({
-				mapData: {},
-				status: response.status,
+	  		status: response.status,
 				error: response.error,
 				isFetching: false
 			})
@@ -47,11 +42,33 @@ export class RouteDashboard extends Component {
 					time: response.total_time
 				},
 				status: response.status,
-				error: '',
 				isFetching: false
-
 			})
 		}
+	}
+
+  addLocation = async (data) => {
+		const {start, end} = data;
+		this.setState({
+			mapData: {},
+			error: '',
+			status: '',
+			isFetching: true,
+		})
+		const response = await getRouteDetails(start, end).catch(e => {
+			this.handleError();
+		});
+		this.handleResponse(response);	
+	}
+
+	// Reset the map, form and button state when reset button is clicked
+	resetPage = () => {
+		this.setState({
+			mapData : {},
+			isFetching: false,
+			error: '',
+			status: ''
+		})
 	}
 	
 	render(){
@@ -59,7 +76,7 @@ export class RouteDashboard extends Component {
 			<div className = 'main-container'>
 				<Header/>
 				<div className = 'content'>
-            <UserForm  addLocation = {this.addLocation} data = {this.state} />
+            <UserForm  addLocation = {this.addLocation} data = {this.state} resetForm = {this.resetPage} />
 					<div className = 'map-container'>
 						<ViewRoute data = {this.state}/>
 					</div>

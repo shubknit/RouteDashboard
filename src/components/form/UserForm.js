@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ViewRouteDetails } from '../directionDetails/ViewRouteDetails';
 
 export class UserForm extends Component {
     constructor(){
@@ -24,6 +25,13 @@ export class UserForm extends Component {
         })
     }
 
+    resetForm = () => {
+        this.setState({
+            buttonText: 'Submit'
+        })
+        this.props.resetForm();
+    }
+
     render(){
         return (
             <div className = 'form-container'>
@@ -35,12 +43,9 @@ export class UserForm extends Component {
                     <label htmlFor = 'end-point'> Drop-off point</label>
                     <input type ="text" id ="end-point" placeholder ='end point' className = 'text-input'
                     ref = { input => this._endPoint = input } required/>
-                    {this.props.data.isFetching && <p>Loading...</p>}
-                    {this.props.data.mapData.distance && <p> total distance: {this.props.data.mapData.distance} </p>}
-                    {this.props.data.mapData.time && <p> total time: {this.props.data.mapData.time} </p>}
-                    {this.props.data.error && <p className = 'error'>  {this.props.data.error} </p>}
+                    <ViewRouteDetails data = { this.props.data }/>
                     <div className = 'button-container'><button  className = 'button' type ="submit"> {this.state.buttonText} </button>
-                        <button className = 'button' type ="reset"> Reset </button>
+                        <button className = 'button' type ="reset" onClick = {this.resetForm}> Reset </button>
                      </div>
                     </form>
             </div>

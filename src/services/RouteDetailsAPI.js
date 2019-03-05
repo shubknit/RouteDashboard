@@ -1,25 +1,26 @@
 import axios from 'axios';
-import { MockAPIDetails, MockAPIStatus } from '../constants/apiConfig';
+import { routeApiDetails, routeApiStatus } from '../constants/apiConfig';
 
 // Get token from API
 const getTokenFromAPI = async (start, end) => {
-    const URL = MockAPIDetails.baseURL + MockAPIDetails.route;
+    const URL = routeApiDetails.baseURL + routeApiDetails.route;
     const response = await axios.post(URL, {start,end});
     return response.data.token
 }
 
 // Get Route details from API using token
 const getRoute = async (token) => {
-    const URL = MockAPIDetails.baseURL + MockAPIDetails.route + "/" + token;
+    const URL = routeApiDetails.baseURL + routeApiDetails.route + "/" + token;
     const response = await axios.get(URL);
     return response.data
 }
 
-// Calling API again when server is busy
+// Calling getTokenFromAPI & getRoute in sequence
 export const getRouteDetails = async (start, end) => {
     const token = await getTokenFromAPI(start, end);
     let response = await getRoute(token);
-    if(response && response.status === MockAPIStatus.status){
+    // Following recursion on getRouteDetails when response status is in progress
+    if(response && response.status === routeApiStatus.inProgress){
         response = await getRouteDetails(start, end);
     }
     return response;
