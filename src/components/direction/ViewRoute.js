@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { googleMapsLoad } from '../../services/googleMapAPI';
 
 // This components is used to get the google map display on the dashboard page.
 export class ViewRoute extends Component {
@@ -7,8 +8,9 @@ export class ViewRoute extends Component {
     this.map = {};
     this.google = {};
   }
+
   componentDidMount(){
-    this.renderMap();
+    this.initMap();
   }
 
   componentDidUpdate(){
@@ -19,34 +21,17 @@ export class ViewRoute extends Component {
       this.initMap();
     }
   }
-  
-  // Loading google map API url
-  renderMap() {
-    const googleAPIKey = process.env.REACT_APP_GOOGLE_MAP_API_KEY;
-    this.loadScript(`https://maps.googleapis.com/maps/api/js?key=${googleAPIKey}&libraries=places&callback=initMap`);
-    window.initMap = this.initMap;
-  }
 
-  // Placing script tag  script in DOM
-  loadScript(url){
-    let index = document.getElementsByTagName("script")[0];
-    let script = document.createElement('script');
-    script.src = url;
-    script.async = true;
-    script.defer = true;
-    index.parentNode.insertBefore(script, index);
-    
-  }
   
   // Initializing Map
-  initMap = () =>  {
+  initMap = async () =>  {
     let { mapOptions } = this.props;
-    this.google = window.google;
-    this.map = new this.google.maps.Map(document.getElementById('map'), mapOptions);
+    this.google = await googleMapsLoad();
+    this.map = new this.google.Map(document.getElementById('map'), mapOptions);
     let  startInput = document.getElementById('start-point');
     var endInput = document.getElementById('end-point');
-    new this.google.maps.places.Autocomplete(startInput);
-    new this.google.maps.places.Autocomplete(endInput);
+    new this.google.places.Autocomplete(startInput);
+    new this.google.places.Autocomplete(endInput);
   }
 
   // Getting Route display on map 
@@ -56,13 +41,13 @@ export class ViewRoute extends Component {
        [endLat, endLng] = dataPoints.end,
        [wayPointLat, wayPointLng] = dataPoints.waypoint;
 
-      let directionsDisplay = new this.google.maps.DirectionsRenderer(),
-       directionsService = new this.google.maps.DirectionsService();
+      let directionsDisplay = new this.google.DirectionsRenderer(),
+       directionsService = new this.google.DirectionsService();
       directionsDisplay.setMap(map);
-      let destinationA = new this.google.maps.LatLng(startLat, startLng),
-       destinationB = new this.google.maps.LatLng(endLat, endLng);
+      let destinationA = new this.google.LatLng(startLat, startLng),
+       destinationB = new this.google.LatLng(endLat, endLng);
       let waypoint = [{
-        location: new this.google.maps.LatLng(wayPointLat, wayPointLng), 
+        location: new this.google.LatLng(wayPointLat, wayPointLng), 
         stopover: true
       }];
       let request = {
