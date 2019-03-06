@@ -72,6 +72,7 @@ export class ViewRoute extends Component {
   }
 }
 
+// Map Default Props 
 ViewRoute.defaultProps = {
   mapOptions :{
     zoom: 10,

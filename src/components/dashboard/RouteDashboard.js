@@ -46,7 +46,8 @@ export class RouteDashboard extends Component {
 			})
 		}
 	}
-
+  
+  // callback when form submit is called with start and end point.	
   addLocation = async (data) => {
 		const {start, end} = data;
 		this.setState({

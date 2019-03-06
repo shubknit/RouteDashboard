@@ -14,6 +14,7 @@ export class UserForm extends Component {
             value: ''
         };
     }
+    // handles when user click submit button
     submit = (e) => {
         e.preventDefault();
         this.setState({
@@ -25,6 +26,7 @@ export class UserForm extends Component {
         })
     }
 
+    // handles when user click reset button
     resetForm = () => {
         this.setState({
             buttonText: 'Submit'
