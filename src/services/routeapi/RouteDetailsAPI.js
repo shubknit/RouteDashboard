@@ -1,15 +1,15 @@
 import axios from 'axios';
-import { routeApiDetails, routeApiStatus } from '../constants/apiConfig';
+import { routeApiDetails, routeApiStatus } from '../../constants/apiConfig';
 
 // Get token from API
-const getTokenFromAPI = async (start, end) => {
+export const getTokenFromAPI = async (start, end) => {
     const URL = routeApiDetails.baseURL + routeApiDetails.route;
     const response = await axios.post(URL, {start,end});
     return response.data.token
 }
 
 // Get Route details from API using token
-const getRoute = async (token) => {
+export const getRoute = async (token) => {
     const URL = routeApiDetails.baseURL + routeApiDetails.route + "/" + token;
     const response = await axios.get(URL);
     return response.data

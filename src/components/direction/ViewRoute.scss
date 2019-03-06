@@ -1,0 +1,24 @@
+.content {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+
+    #map {
+        width: 50vw;
+        height: 100vh;
+    }
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .content {
+        display: block;
+
+        #map {
+            width: auto;
+        }
+    }
+}

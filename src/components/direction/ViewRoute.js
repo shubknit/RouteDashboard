@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { googleMapsLoad } from '../../services/googleMapAPI';
+import { googleMapsLoad } from '../../services/googlemap/googleMapAPI';
 
 // This components is used to get the google map display on the dashboard page.
 export class ViewRoute extends Component {

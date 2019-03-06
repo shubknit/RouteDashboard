@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Header } from '../header/Header';
 import { UserForm } from '../form/UserForm';
 import  { ViewRoute }  from '../direction/ViewRoute';
-import { getRouteDetails } from '../../services/RouteDetailsAPI';
+import { getRouteDetails } from '../../services/routeapi/RouteDetailsAPI';
 import { responseError } from '../../constants/apiConfig';
 
 // This Component acts a dashboard  which includes user form and map view.
