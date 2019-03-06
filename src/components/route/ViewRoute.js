@@ -25,13 +25,9 @@ export class ViewRoute extends Component {
   
   // Initializing Map
   initMap = async () =>  {
-    let { mapOptions } = this.props;
+    const { mapOptions } = this.props;
     this.google = await googleMapsLoad();
     this.map = new this.google.Map(document.getElementById('map'), mapOptions);
-    let  startInput = document.getElementById('start-point');
-    var endInput = document.getElementById('end-point');
-    new this.google.places.Autocomplete(startInput);
-    new this.google.places.Autocomplete(endInput);
   }
 
   // Getting Route display on map 
@@ -41,16 +37,16 @@ export class ViewRoute extends Component {
        [endLat, endLng] = dataPoints.end,
        [wayPointLat, wayPointLng] = dataPoints.waypoint;
 
-      let directionsDisplay = new this.google.DirectionsRenderer(),
+      const directionsDisplay = new this.google.DirectionsRenderer(),
        directionsService = new this.google.DirectionsService();
       directionsDisplay.setMap(map);
-      let destinationA = new this.google.LatLng(startLat, startLng),
+      const destinationA = new this.google.LatLng(startLat, startLng),
        destinationB = new this.google.LatLng(endLat, endLng);
-      let waypoint = [{
+      const waypoint = [{
         location: new this.google.LatLng(wayPointLat, wayPointLng), 
         stopover: true
       }];
-      let request = {
+      const request = {
         origin: destinationA,
         destination : destinationB,
         waypoints: waypoint,

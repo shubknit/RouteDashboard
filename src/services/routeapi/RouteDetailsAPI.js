@@ -2,9 +2,9 @@ import axios from 'axios';
 import { routeApiDetails, routeApiStatus } from '../../constants/apiConfig';
 
 // Get token from API
-export const getTokenFromAPI = async (start, end) => {
+export const getTokenFromAPI = async (origin, destination) => {
     const URL = routeApiDetails.baseURL + routeApiDetails.route;
-    const response = await axios.post(URL, {start,end});
+    const response = await axios.post(URL, {origin,destination});
     return response.data.token
 }
 

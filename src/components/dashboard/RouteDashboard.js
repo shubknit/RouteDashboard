@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Header } from '../header/Header';
-import { UserForm } from '../form/UserForm';
-import  { ViewRoute }  from '../direction/ViewRoute';
+import { UserForm } from '../userform/UserForm';
+import  { ViewRoute }  from '../route/ViewRoute';
 import { getRouteDetails } from '../../services/routeapi/RouteDetailsAPI';
 import { responseError } from '../../constants/apiConfig';
 
