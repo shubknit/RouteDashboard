@@ -26,7 +26,6 @@ export class UserForm extends Component {
     // handles when user click submit button
     submit = (e) => {
         const { startingLocation, dropOffPoint } = this.state;
-        console.log('location details',startingLocation, dropOffPoint);
         e.preventDefault();
         this.setState({
             buttonText: 'Re-Submit',
@@ -62,7 +61,7 @@ export class UserForm extends Component {
                     />
                     <ViewRouteDetails data = { this.props.data }/>
                     <div className = 'button-container'>
-                    <button  className = 'button' type ="submit" > {this.state.buttonText} </button>
+                    <button  className = 'button' type ="submit" disabled={!this.enableSubmit()}> {this.state.buttonText} </button>
                     <button className = 'button' type ="reset" onClick = {this.resetForm}> Reset </button>
                      </div>
                 </form>

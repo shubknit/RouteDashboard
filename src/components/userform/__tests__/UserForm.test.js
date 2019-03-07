@@ -15,12 +15,9 @@ const errorData = {
     },
     error: 'location not accesbile'
 }
-const _startPoint = {
-    value: ''
-}
-const _endPoint = {
-    value: ''
-}
+let startLocation;
+let dropOffPoint;
+
 
 
 it('should render the form correctly with distance and time', () => {
@@ -40,7 +37,7 @@ it('should submit form correctly', () => {
     	preventDefault: () => {}
     })
 	expect(onSubmitSpy).toHaveBeenLastCalledWith({
-        start : _startPoint.value,
-        end : _endPoint.value
+        start : startLocation,
+        end : dropOffPoint
 	})
 })

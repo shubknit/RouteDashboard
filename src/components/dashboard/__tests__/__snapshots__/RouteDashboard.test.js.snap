@@ -29,30 +29,32 @@ exports[`should render the dashboard page correctly 1`] = `
         className="form"
         onSubmit={[Function]}
       >
-        <label
-          htmlFor="start-point"
-        >
-           Starting Location 
-        </label>
-        <input
-          className="text-input"
-          id="start-point"
-          placeholder="start point"
-          required={true}
-          type="text"
-        />
-        <label
-          htmlFor="end-point"
-        >
-           Drop-off point
-        </label>
-        <input
-          className="text-input"
-          id="end-point"
-          placeholder="end point"
-          required={true}
-          type="text"
-        />
+        <div>
+          <label>
+             
+            Starting location
+             
+          </label>
+          <input
+            className="text-input"
+            name="startingLocation"
+            onChange={[Function]}
+            type="text"
+          />
+        </div>
+        <div>
+          <label>
+             
+            Drop-off point
+             
+          </label>
+          <input
+            className="text-input"
+            name="dropOffPoint"
+            onChange={[Function]}
+            type="text"
+          />
+        </div>
         <div
           className="route-info"
         />
@@ -61,6 +63,7 @@ exports[`should render the dashboard page correctly 1`] = `
         >
           <button
             className="button"
+            disabled={true}
             type="submit"
           >
              

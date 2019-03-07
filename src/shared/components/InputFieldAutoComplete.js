@@ -20,7 +20,7 @@ export class InputFieldAutoComplete extends Component {
 
     renderAutoComplete = async () => {
         const maps = await this.props.googleMapsLoad();
-        let locationDetails = {};
+        const locationDetails = {};
         this.inputAutoComplete = new maps.places.Autocomplete(this.inputElement);
         this.inputAutoComplete.addListener('place_changed', ()=>{
             const place = this.inputAutoComplete.getPlace();

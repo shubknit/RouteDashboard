@@ -42,6 +42,9 @@
     >* {
         margin-bottom: $m-size;
     }
+    label{
+        display: block;
+    }
 }
 
 .form__error {

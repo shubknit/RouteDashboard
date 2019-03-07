@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render the InputFieldAutoComplete  correctly 1`] = `
+<div>
+  <label>
+     
+    start
+     
+  </label>
+  <input
+    className="text-input"
+    onChange={[Function]}
+    type="text"
+  />
+</div>
+`;
