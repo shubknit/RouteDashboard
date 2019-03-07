@@ -54,3 +54,9 @@
 .error {
     color: red;
 }
+
+@media screen and (max-width: 767px) {
+    .text-input {
+        width: 100%;
+    }
+}
