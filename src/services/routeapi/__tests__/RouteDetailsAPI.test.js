@@ -29,9 +29,25 @@ const internalServerErrorResponse = {
     error : 'Internal Server error'
 }
 
+const errorMessage = 'Internal Server Error';
+
 const inProgressResponse = {
     status: 'In Progress'
 } 
+
+// function to calculate random number  between two numbers 
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+const responseOb = { 
+    data: {
+        status: null
+    }
+};
+
 
 
 it('check if getTokenFromAPI get token value from response ', async () => {
@@ -84,3 +100,49 @@ it('check if getRoute get in progress from response' , async () => {
     const response = await getRoute(token);
     expect(response.status).toEqual('In Progress');
 });
+
+
+it("Whether recusion occurs on 'in progress' state", async () => {
+    let callCount = 0;
+    const postService = jest.spyOn(axios, 'post');
+    const getService = jest.spyOn(axios, 'get');
+  
+    getService.mockImplementation(() => {
+        const apiBehaviour = getRandomInt(0, 4);
+        if (apiBehaviour === 0) {
+            responseOb.data.status = 500;
+        } else if (apiBehaviour === 1) {
+            responseOb.data.status = 'in progress'; // Should cause recursions
+        } else if (apiBehaviour === 2) {
+            responseOb.data.status = 'failure';
+        } else {
+            responseOb = Object.create(successResponse); 
+        }
+        return Promise.resolve(responseOb);
+    })
+
+    postService.mockImplementation(() => {
+        const apiBehaviour = getRandomInt(0, 1);
+        callCount++;
+        if (apiBehaviour === 0)
+         return Promise.reject(errorMessage); // for Internal server error
+        else
+         return  Promise.resolve({data: responseToken});
+    });
+
+    const res = await getRouteDetails(requestInput.start, requestInput.end).catch((errormsg) => {
+        expect(errormsg).toBe(errorMessage); // Should match when got internal server error
+        expect(postService).toHaveBeenCalledTimes(callCount);
+    });
+
+    expect(postService).toHaveBeenCalledTimes(callCount);
+
+    postService.mockRestore();
+    getService.mockRestore();
+
+})
+
+
+
+
+
