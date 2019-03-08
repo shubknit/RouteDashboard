@@ -22,7 +22,7 @@ REACT_APP_GOOGLE_MAP_API_KEY = <Google map api key>
 npm install
 npm start
 ```
-// Access on http://localhost:3000/
+## Access on http://localhost:3000/
 
 ## Tests
 
